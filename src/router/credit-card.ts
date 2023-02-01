@@ -1,19 +1,30 @@
+// external libraries
 import express from "express";
+import bodyParser from "body-parser";
 
 const router = express.Router();
 
 /**
- * "Add" will create a new credit card for a given name, card number, and limit
-    - Card numbers should be validated using Luhn 10
-    - New cards start with a £0 balance
-    - for cards not compatible with Luhn 10, return an error
+ * @openapi
+ * /credit-card/add:
+ *   post:
+ *     description: creates a new credit card for a given name, card number, and limit
+ *     responses:
+ *       200:
+ *         description: Returns a mysterious string.
  */
-router.get("/add", (req, res) => {
+router.post("/add", bodyParser.json(), (req, res) => {
   res.send("Add a credit card");
 });
 
 /**
- * "Get all" returns all cards in the system
+ * @openapi
+ * /credit-card/get-all:
+ *  get:
+ *   description: gets all credit cards
+ *   responses:
+ *     200:
+ *       description: Returns a mysterious string.
  */
 router.get("/get-all", (req, res) => {
   res.send("get all credit cards");
