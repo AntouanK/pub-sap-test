@@ -1,7 +1,10 @@
 // external libraries
 import express from "express";
 import bodyParser from "body-parser";
+
+// internal modules
 import { createCreditCard } from "../types";
+import { getAllCreditCards, saveCreditCard } from "../db";
 
 const router = express.Router();
 
@@ -74,6 +77,14 @@ router.post("/add", bodyParser.json(), (req, res) => {
     return;
   }
 
+  // try to save the credit card
+  try {
+    saveCreditCard(newCard);
+  } catch (error: any) {
+    res.status(400).send(error.message);
+    return;
+  }
+
   const responseBody = {
     message: "Credit card created",
     success: true,
@@ -87,13 +98,41 @@ router.post("/add", bodyParser.json(), (req, res) => {
  * @openapi
  * /credit-card/get-all:
  *  get:
- *   description: gets all credit cards
- *   responses:
- *     200:
- *       description: Returns a mysterious string.
+ *    description: Returns all saved credit cards.
+ *    responses:
+ *      200:
+ *       description: Returns a message, a success flag and all cards.
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               message:
+ *                 type: string
+ *               success:
+ *                 type: boolean
+ *               cards:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     number:
+ *                       type: string
+ *                     firstName:
+ *                       type: string
+ *                     lastName:
+ *                       type: string
+ *                     limit:
+ *                       type: number
+ *
  */
-router.get("/get-all", (req, res) => {
-  res.send("get all credit cards");
+router.get("/get-all", (_req, res) => {
+  const responseBody = {
+    message: "Credit cards retrieved",
+    success: true,
+    cards: getAllCreditCards(),
+  };
+  res.json(responseBody);
 });
 
 export default router;

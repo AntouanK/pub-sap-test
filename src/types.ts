@@ -1,7 +1,7 @@
 // external libraries
 import fastLuhn from "fast-luhn";
 
-type CreditCard = {
+export type CreditCard = {
   number: string;
   firstName: string;
   lastName: string;
@@ -10,6 +10,11 @@ type CreditCard = {
 
 export const createCreditCard = (creditCard: CreditCard) => {
   // validate credit card number
+  // it must be all digits, 13 to 19 digits long, and pass the Luhn algorithm
+  if (!/^\d{13,19}$/.test(creditCard.number)) {
+    throw new Error("Invalid credit card number");
+  }
+  // validate number
   if (!fastLuhn(creditCard.number)) {
     throw new Error("Invalid credit card number");
   }
