@@ -57,7 +57,7 @@ const router = express.Router();
  *
  *
  */
-router.post("/add", bodyParser.json(), (req, res) => {
+router.post("/add", bodyParser.json(), async (req, res) => {
   // expect the request body to be a JSON object with the following fields:
   // { card : CreditCard }
   const body = req.body;
@@ -79,9 +79,15 @@ router.post("/add", bodyParser.json(), (req, res) => {
 
   // try to save the credit card
   try {
-    saveCreditCard(newCard);
+    await saveCreditCard(newCard);
   } catch (error: any) {
-    res.status(400).send(error.message);
+    const statusCode =
+      error.message === "Credit card already exists" ? 400 : 500;
+    if (statusCode === 500) {
+      // log for dev / debug purposes
+      console.log(error.message);
+    }
+    res.status(statusCode).send(error.message);
     return;
   }
 
@@ -111,7 +117,7 @@ router.post("/add", bodyParser.json(), (req, res) => {
  *                 type: string
  *               success:
  *                 type: boolean
- *               cards:
+ *               creditCards:
  *                 type: array
  *                 items:
  *                   type: object
@@ -126,11 +132,23 @@ router.post("/add", bodyParser.json(), (req, res) => {
  *                       type: number
  *
  */
-router.get("/get-all", (_req, res) => {
+router.get("/get-all", async (_req, res) => {
+  let creditCards;
+  try {
+    creditCards = await getAllCreditCards();
+  } catch (error: any) {
+    // log for dev / debug purposes
+    console.log(error.message);
+
+    // return a 500 error to the client
+    res.status(500).send("Something went wrong while retrieving credit cards");
+    return;
+  }
+
   const responseBody = {
     message: "Credit cards retrieved",
     success: true,
-    cards: getAllCreditCards(),
+    creditCards,
   };
   res.json(responseBody);
 });
