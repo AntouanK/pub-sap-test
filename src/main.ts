@@ -1,4 +1,3 @@
-// express hello world
 import express from "express";
 import routerCreditCard from "./router/credit-card";
 

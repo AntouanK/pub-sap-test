@@ -12,5 +12,9 @@ We will also use Typescript to avoid runtime errors as much as possible.
 
 ( assuming node.js is installed )
 
-1. `yarn build` to build the project
-2. `yarn start` to start the server
+1.  `yarn` to install dependencies
+2.  `yarn build` to build the project
+    3a. `yarn start` to start the server
+    3b. `yarn start-dev` to start the server in development mode (with nodemon)
+
+The server will listen to the port 3000.
