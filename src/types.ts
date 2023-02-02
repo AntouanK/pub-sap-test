@@ -1,5 +1,4 @@
-// external libraries
-import fastLuhn from "fast-luhn";
+import { validateCreditCardNumber } from "./luhn";
 
 export type CreditCard = {
   number: string;
@@ -15,7 +14,7 @@ export const createCreditCard = (creditCard: CreditCard) => {
     throw new Error("Invalid credit card number");
   }
   // validate number
-  if (!fastLuhn(creditCard.number)) {
+  if (!validateCreditCardNumber(creditCard.number)) {
     throw new Error("Invalid credit card number");
   }
   // validate limit

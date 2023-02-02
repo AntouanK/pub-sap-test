@@ -17,6 +17,10 @@ We will also use Typescript to avoid runtime errors as much as possible.
     3a. `yarn start` to start the server
     3b. `yarn start-dev` to start the server in development mode (with nodemon)
 
-The server will listen to the port 3000.
+The server will listen to the port 3333.
 
 A swagger UI documentation is available at `/docs`.
+
+# How to test
+
+`yarn test` to run the tests
