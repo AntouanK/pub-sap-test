@@ -99,7 +99,7 @@ router.post("/add", bodyParser.json(), async (req, res) => {
       error.message === "Credit card already exists" ? 400 : 500;
     if (statusCode === 500) {
       // log for dev / debug purposes
-      console.log(error.message);
+      console.log("[ERROR]", error.message);
     }
     res.status(statusCode).send(error.message);
     return;
@@ -160,7 +160,7 @@ router.get("/get-all", async (_req, res) => {
     creditCards = await getAllCreditCards();
   } catch (error: any) {
     // log for dev / debug purposes
-    console.log(error.message);
+    console.log("[ERROR]", error.message);
 
     // return a 500 error to the client
     res.status(500).send("Something went wrong while retrieving credit cards");

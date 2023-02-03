@@ -22,7 +22,12 @@ export const createCreditCard = (creditCard: CreditCard) => {
     throw new Error("Invalid credit card limit");
   }
   // validate name
-  if (creditCard.firstName.length === 0 || creditCard.lastName.length === 0) {
+  if (
+    typeof creditCard.firstName !== "string" ||
+    creditCard.firstName.length === 0 ||
+    typeof creditCard.lastName !== "string" ||
+    creditCard.lastName.length === 0
+  ) {
     throw new Error("Invalid credit card name");
   }
 
