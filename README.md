@@ -24,3 +24,6 @@ A swagger UI documentation is available at `/docs`.
 # How to test
 
 `yarn test` to run the tests
+
+
+[Peek 2023-02-03 10-57.webm](https://user-images.githubusercontent.com/4569111/216586919-e2537c0b-3f7b-4edc-917f-919c05a12943.webm)
