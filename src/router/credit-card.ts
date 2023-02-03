@@ -12,7 +12,7 @@ const router = express.Router();
  * @openapi
  * /credit-card/add:
  *   post:
- *     description: "creates a new credit card for a given name, card number, and limit. ( test card number: 5555555555554444 )"
+ *     description: "creates a new credit card for a given name, card number, and limit."
  *     requestBody:
  *      content:
  *        application/json:
@@ -24,12 +24,20 @@ const router = express.Router();
  *                properties:
  *                  number:
  *                    type: string
+ *                    description: "the credit card number"
+ *                    example: "5555555555554444"
  *                  firstName:
  *                    type: string
+ *                    description: "the first name of the card holder"
+ *                    example: "John"
  *                  lastName:
  *                    type: string
+ *                    description: "the last name of the card holder"
+ *                    example: "Doe"
  *                  limit:
  *                    type: number
+ *                    description: "the credit limit of the card"
+ *                    example: 1000
  *
  *     responses:
  *       200:
@@ -48,14 +56,20 @@ const router = express.Router();
  *                   properties:
  *                     number:
  *                       type: string
+ *                       description: "the credit card number"
+ *                       example: "5555555555554444"
  *                     firstName:
  *                       type: string
+ *                       description: "the first name of the card holder"
+ *                       example: "John"
  *                     lastName:
  *                       type: string
+ *                       description: "the last name of the card holder"
+ *                       example: "Doe"
  *                     limit:
  *                       type: number
- *
- *
+ *                       description: "the credit limit of the card"
+ *                       example: 1000
  */
 router.post("/add", bodyParser.json(), async (req, res) => {
   // expect the request body to be a JSON object with the following fields:
@@ -124,12 +138,20 @@ router.post("/add", bodyParser.json(), async (req, res) => {
  *                   properties:
  *                     number:
  *                       type: string
+ *                       description: "the credit card number"
+ *                       example: "5555555555554444"
  *                     firstName:
  *                       type: string
+ *                       description: "the first name of the card holder"
+ *                       example: "John"
  *                     lastName:
  *                       type: string
+ *                       description: "the last name of the card holder"
+ *                       example: "Doe"
  *                     limit:
  *                       type: number
+ *                       description: "the credit limit of the card"
+ *                       example: 1000
  *
  */
 router.get("/get-all", async (_req, res) => {
